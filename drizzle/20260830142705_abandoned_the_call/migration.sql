@@ -1,0 +1,1 @@
+ALTER TABLE "exposure_logs" DROP COLUMN "test";

@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "calibration_offset_db" double precision DEFAULT 0 NOT NULL;
