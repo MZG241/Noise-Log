@@ -105,6 +105,7 @@ export default function EventsTable({
         toast.success("Event created successfully");
         setIsAddModalOpen(false);
         router.refresh();
+        window.location.reload()
       } else {
         toast.error(res?.error || "Failed to create event");
       }
@@ -140,6 +141,7 @@ export default function EventsTable({
       if (res?.success) {
         toast.success("Event updated successfully");
         setEditingEvent(null);
+        window.location.reload()
         router.refresh();
       } else {
         toast.error(res?.error || "Failed to update event");

@@ -14,7 +14,7 @@ export async function createEventAction(formData: FormData) {
   try {
     const session = await getSession();
 
-    if (!session || session.role !== "admin") {
+    if (!session) {
       return { error: "You are not allowed" };
     }
 
@@ -70,6 +70,7 @@ export async function createEventAction(formData: FormData) {
       createdAt: new Date(),
     });
 
+    revalidatePath("/dashboard/events");
     revalidatePath("/admin/events");
     return { success: true };
   } catch (error: any) {
@@ -85,7 +86,7 @@ export async function updateEventAction(id: string, formData: FormData) {
   try {
     const session = await getSession();
 
-    if (!session || session.role !== "admin") {
+    if (!session) {
       return { error: "You are not allowed" };
     }
 
@@ -145,6 +146,7 @@ export async function updateEventAction(id: string, formData: FormData) {
       })
       .where(eq(events.id, id));
 
+    revalidatePath("/dashboard/events");
     revalidatePath("/admin/events");
     return { success: true };
   } catch (error: any) {
@@ -160,7 +162,7 @@ export async function deleteEventAction(id: string) {
   try {
     const session = await getSession();
 
-    if (!session || session.role !== "admin") {
+    if (!session) {
       return { error: "You are not allowed" };
     }
 
@@ -170,6 +172,7 @@ export async function deleteEventAction(id: string) {
 
     await db.delete(events).where(eq(events.id, id));
 
+    revalidatePath("/dashboard/events");
     revalidatePath("/admin/events");
     return { success: true };
   } catch (error: any) {
@@ -539,6 +542,7 @@ export async function createExposureLogAction(formData: FormData) {
     // 13. REVALIDATION
     // =========================================
 
+    revalidatePath("/dashboard/events");
     revalidatePath("/admin/events");
 
     return {

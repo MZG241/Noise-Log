@@ -60,6 +60,7 @@ export default function EventsTable({ initialEvents, usersList = [], standardsLi
     if (res?.success) {
       setEvents(events.filter((e) => e.id !== id));
       toast.success("Event deleted successfully");
+      window.location.reload()
     } else {
       toast.error(res?.error || "Failed to delete event");
     }
@@ -92,6 +93,7 @@ export default function EventsTable({ initialEvents, usersList = [], standardsLi
         toast.success("Event created successfully");
         setIsAddModalOpen(false);
         router.refresh();
+        window.location.reload()
       } else {
         toast.error(res?.error || "Failed to create event");
       }
@@ -129,6 +131,7 @@ export default function EventsTable({ initialEvents, usersList = [], standardsLi
         toast.success("Event updated successfully");
         setEditingEvent(null);
         router.refresh();
+        window.location.reload()
       } else {
         toast.error(res?.error || "Failed to update event");
       }
